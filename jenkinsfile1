@@ -1,5 +1,4 @@
 pipeline{
-    agent any
     stages{
         stage("A"){
             steps{
@@ -16,6 +15,39 @@ pipeline{
                     echo "========A execution failed========"
                 }
             }
+        }
+         stage("B"){
+            steps{
+                echo "========executing B========"
+            }
+            post{
+                always{
+                    echo "========always========"
+                }
+                success{
+                    echo "========B executed successfully========"
+                }
+                failure{
+                    echo "========B execution failed========"
+                }
+            }
+        }
+        stage("c"){
+            steps{
+                echo "========executing c========"
+            }
+            post{
+                always{
+                    echo "========always========"
+                }
+                success{
+                    echo "========B executed successfully========"
+                }
+                failure{
+                    echo "========B execution failed========"
+                }
+            }
+        }
     }
     post{
         always{
@@ -28,5 +60,4 @@ pipeline{
             echo "========pipeline execution failed========"
         }
     }
-}
 }
